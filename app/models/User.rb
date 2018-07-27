@@ -42,7 +42,9 @@ class User
     end
     def safe_recipes
         recipes.select do |recipe|
-            recipe.allergens
+            recipe.allergens.all? do |allergen|
+              !self.allergens.include?(allergen)
+            end
         end
     end
 end
